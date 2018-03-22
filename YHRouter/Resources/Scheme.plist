@@ -2,47 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>share</key>
-	<string>NUShare</string>
-	<key>property</key>
-	<string>NUProperty</string>
-	<key>usercenter</key>
-	<string>NUUserCenter</string>
-	<key>hongbao</key>
-	<string>NUHongBao</string>
-	<key>webview</key>
-	<string>NUElement</string>
-	<key>movie</key>
-	<string>NUMovie</string>
-	<key>fnb</key>
-	<string>NUFnB</string>
-	<key>poi</key>
-	<string>NUPOI</string>
-	<key>user</key>
-	<string>NULogin</string>
-	<key>lottery</key>
-	<string>NULottery</string>
-	<key>news</key>
-	<string>NUNews</string>
-	<key>transport</key>
-	<string>NUTransport</string>
-	<key>group</key>
-	<string>NUGroup</string>
-	<key>review</key>
-	<string>NUElement</string>
-	<key>conversation</key>
-	<string>NUConversation</string>
-	<key>inbox</key>
-	<string>NUConversation</string>
-	<key>buysell</key>
-	<string>NUBuySell</string>
-	<key>socialmedia</key>
-	<string>NUSocialMedia</string>
-	<key>service</key>
-	<string>NUPOI</string>
-	<key>homeservice</key>
-	<string>NUPOI</string>
-	<key>job</key>
-	<string>NUJob</string>
+	<key>layer</key>
+	<string>YYLayer</string>
 </dict>
 </plist>

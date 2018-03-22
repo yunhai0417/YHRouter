@@ -145,6 +145,7 @@
 		608D02C52060B9DB0018667A /* ignore */ = {
 			isa = PBXGroup;
 			children = (
+				608D02D3206248150018667A /* YHRouterScheme.plist */,
 				608D02932060B9620018667A /* AppDelegate.h */,
 				608D02942060B9620018667A /* AppDelegate.m */,
 				608D02962060B9620018667A /* ViewController.h */,
@@ -162,7 +163,6 @@
 		608D02C62060B9FA0018667A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				608D02D3206248150018667A /* YHRouterScheme.plist */,
 				608D02CE20614AC10018667A /* Scheme.plist */,
 				608D029C2060B9620018667A /* Assets.xcassets */,
 			);
