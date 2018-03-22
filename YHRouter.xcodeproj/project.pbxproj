@@ -15,6 +15,12 @@
 		608D02A32060B9620018667A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02A22060B9620018667A /* main.m */; };
 		608D02AD2060B9620018667A /* YHRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02AC2060B9620018667A /* YHRouterTests.m */; };
 		608D02B82060B9620018667A /* YHRouterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02B72060B9620018667A /* YHRouterUITests.m */; };
+		608D02CA206111F40018667A /* YHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02C9206111F40018667A /* YHRouter.m */; };
+		608D02CD20612AA00018667A /* YHRouterUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02CC20612AA00018667A /* YHRouterUtil.m */; };
+		608D02CF20614AC10018667A /* Scheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = 608D02CE20614AC10018667A /* Scheme.plist */; };
+		608D02D22062071E0018667A /* YHRouterMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02D12062071E0018667A /* YHRouterMatcher.m */; };
+		608D02D4206248150018667A /* YHRouterScheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = 608D02D3206248150018667A /* YHRouterScheme.plist */; };
+		608D02D72062648E0018667A /* NUFollowingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D02D62062648E0018667A /* NUFollowingVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,16 @@
 		608D02B32060B9620018667A /* YHRouterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YHRouterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		608D02B72060B9620018667A /* YHRouterUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHRouterUITests.m; sourceTree = "<group>"; };
 		608D02B92060B9620018667A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		608D02C8206111F40018667A /* YHRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHRouter.h; sourceTree = "<group>"; };
+		608D02C9206111F40018667A /* YHRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHRouter.m; sourceTree = "<group>"; };
+		608D02CB20612AA00018667A /* YHRouterUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHRouterUtil.h; sourceTree = "<group>"; };
+		608D02CC20612AA00018667A /* YHRouterUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHRouterUtil.m; sourceTree = "<group>"; };
+		608D02CE20614AC10018667A /* Scheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scheme.plist; sourceTree = "<group>"; };
+		608D02D02062071E0018667A /* YHRouterMatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHRouterMatcher.h; sourceTree = "<group>"; };
+		608D02D12062071E0018667A /* YHRouterMatcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHRouterMatcher.m; sourceTree = "<group>"; };
+		608D02D3206248150018667A /* YHRouterScheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YHRouterScheme.plist; sourceTree = "<group>"; };
+		608D02D52062648E0018667A /* NUFollowingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUFollowingVC.h; sourceTree = "<group>"; };
+		608D02D62062648E0018667A /* NUFollowingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NUFollowingVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +117,7 @@
 		608D02922060B9620018667A /* YHRouter */ = {
 			isa = PBXGroup;
 			children = (
+				608D02C72060FF1B0018667A /* Core */,
 				608D02C62060B9FA0018667A /* Resources */,
 				608D02C52060B9DB0018667A /* ignore */,
 			);
@@ -136,6 +153,8 @@
 				608D029E2060B9620018667A /* LaunchScreen.storyboard */,
 				608D02A12060B9620018667A /* Info.plist */,
 				608D02A22060B9620018667A /* main.m */,
+				608D02D52062648E0018667A /* NUFollowingVC.h */,
+				608D02D62062648E0018667A /* NUFollowingVC.m */,
 			);
 			path = ignore;
 			sourceTree = "<group>";
@@ -143,9 +162,24 @@
 		608D02C62060B9FA0018667A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				608D02D3206248150018667A /* YHRouterScheme.plist */,
+				608D02CE20614AC10018667A /* Scheme.plist */,
 				608D029C2060B9620018667A /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		608D02C72060FF1B0018667A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				608D02C8206111F40018667A /* YHRouter.h */,
+				608D02C9206111F40018667A /* YHRouter.m */,
+				608D02CB20612AA00018667A /* YHRouterUtil.h */,
+				608D02CC20612AA00018667A /* YHRouterUtil.m */,
+				608D02D02062071E0018667A /* YHRouterMatcher.h */,
+				608D02D12062071E0018667A /* YHRouterMatcher.m */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +290,9 @@
 			files = (
 				608D02A02060B9620018667A /* LaunchScreen.storyboard in Resources */,
 				608D029D2060B9620018667A /* Assets.xcassets in Resources */,
+				608D02D4206248150018667A /* YHRouterScheme.plist in Resources */,
 				608D029B2060B9620018667A /* Main.storyboard in Resources */,
+				608D02CF20614AC10018667A /* Scheme.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +319,11 @@
 			files = (
 				608D02982060B9620018667A /* ViewController.m in Sources */,
 				608D02A32060B9620018667A /* main.m in Sources */,
+				608D02CD20612AA00018667A /* YHRouterUtil.m in Sources */,
 				608D02952060B9620018667A /* AppDelegate.m in Sources */,
+				608D02D22062071E0018667A /* YHRouterMatcher.m in Sources */,
+				608D02CA206111F40018667A /* YHRouter.m in Sources */,
+				608D02D72062648E0018667A /* NUFollowingVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

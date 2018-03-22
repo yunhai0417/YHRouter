@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>usercenter/settingvc</key>
+	<string>NUCenterSettingViewController</string>
+	<key>usercenter/feedback</key>
+	<string>NUCenterFBViewController</string>
+	<key>usercenter/feedbackproblem/:id</key>
+	<string>NUFBProlemVC</string>
+	<key>usercenter/privacyvc</key>
+	<string>NUCenterPrivcayViewController</string>
+	<key>usercenter/users/:id/profile</key>
+	<string>NUCenterProfileViewController</string>
+	<key>usercenter/users/:user_id/sale/properties</key>
+	<string>NUMySaleRentalVC</string>
+	<key>usercenter/users/:user_id/rental/properties</key>
+	<string>NUMySaleRentalVC</string>
+	<key>usercenter/following</key>
+	<string>NUFollowingVC</string>
+</dict>
+</plist>
