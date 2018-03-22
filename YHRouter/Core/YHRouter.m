@@ -46,7 +46,7 @@
             }
         }];
     }
-    _mainHost = [self createHostWithName:@"NUUserCenterScheme" andBundleName:[[NSBundle mainBundle] bundleIdentifier] andIsfromPods:false];
+    _mainHost = [self createHostWithName:@"main" andBundleName:[[NSBundle mainBundle] bundleIdentifier] andIsfromPods:false];
 }
 
 - (YHRouterHost *)createHostWithName:(NSString *)name andBundleName:(NSString *)bundleName andIsfromPods:(BOOL)fromPods {
@@ -105,7 +105,7 @@
         validUrl = [NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]];
     }
     
-    if ([validUrl.scheme containsString:@"nestia"]) {
+    if ([validUrl.scheme containsString:@"runloop"]) {
         return [self decodeMatherRoutableWithURL:validUrl injectedQueryParam:queryParam];
     }
     
