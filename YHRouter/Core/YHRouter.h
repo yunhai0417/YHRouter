@@ -37,6 +37,6 @@
  */
 - (void)run;
 
-
+- (UIViewController *)handleAndPushVCWithURL:(NSString *)url injectedQueryParam:(NSDictionary *)queryParam WithNav:(UINavigationController *)navigationController AndAnimated:(BOOL)animated;
 
 @end

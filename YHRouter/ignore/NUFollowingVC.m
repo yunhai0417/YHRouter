@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"xxxx");
+    self.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,9 +44,9 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (UIViewController *)instanceWithMatcher:(YHRouterMatcher *)matcher {
+- (UIViewController *)instanceWithEntity:(YHRoterEntity *)entity {
     NSLog(@"(UIViewController *)instanceWithMatcher:(YHRouterMatcher *)matcher");
-    return nil;
+    return [[NUFollowingVC alloc] init];
 }
 
 @end

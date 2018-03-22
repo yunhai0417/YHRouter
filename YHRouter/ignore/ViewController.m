@@ -29,6 +29,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)buttonAction:(id)sender {
+    [YHRouter.sharedRouter handleAndPushVCWithURL:@"nestia://usercenter/following" injectedQueryParam:[NSDictionary dictionary] WithNav:self.navigationController AndAnimated:YES];
+}
 
 
 @end

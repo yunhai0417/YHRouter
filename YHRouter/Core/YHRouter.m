@@ -47,9 +47,6 @@
         }];
     }
     _mainHost = [self createHostWithName:@"NUUserCenterScheme" andBundleName:[[NSBundle mainBundle] bundleIdentifier] andIsfromPods:false];
-    
-    YHRouterMatcher * temp = [[YHRouterMatcher alloc] initWithRegex:@"^usercenter/following$" WithClassName:@"NUFollowingVC" WithPathIndice:nil];
-    [self handleWithMatcher:temp WithBundleName:[[NSBundle mainBundle] bundleIdentifier] withUrl:nil injectedQueryParam:nil];
 }
 
 - (YHRouterHost *)createHostWithName:(NSString *)name andBundleName:(NSString *)bundleName andIsfromPods:(BOOL)fromPods {
@@ -86,6 +83,60 @@
 }
 
 
+- (UIViewController *)handleAndPushVCWithURL:(NSString *)url injectedQueryParam:(NSDictionary *)queryParam WithNav:(UINavigationController *)navigationController AndAnimated:(BOOL)animated {
+    UIViewController * pointVC = [self handleWithURL:url injectedQueryParam:queryParam];
+    if (navigationController) {
+        [navigationController pushViewController:pointVC animated:animated];
+    } else {
+        UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topController.presentedViewController) {
+            topController = topController.presentedViewController;
+        }
+        [topController presentViewController:pointVC animated:animated completion:nil];
+    }
+    return pointVC;
+}
+
+- (UIViewController *)handleWithURL:(NSString *)url injectedQueryParam:(NSDictionary *)queryParam {
+    NSURL * validUrl;
+    if ([NSURL URLWithString:url]) {
+        validUrl = [NSURL URLWithString:url];
+    } else if ([NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]]) {
+        validUrl = [NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]];
+    }
+    
+    if ([validUrl.scheme containsString:@"nestia"]) {
+        return [self decodeMatherRoutableWithURL:validUrl injectedQueryParam:queryParam];
+    }
+    
+    return nil;
+}
+
+- (UIViewController *)decodeMatherRoutableWithURL:(NSURL *)url injectedQueryParam:(NSDictionary *)queryParam {
+    UIViewController *hostvc = [self handleWithHost:[_hosts objectForKey:url.host] WithHostName:url.host WithPath:url.path WithURL:url injectQueryParam:queryParam];
+    if (hostvc) {
+        return hostvc;
+    }
+    UIViewController *mainvc = [self handleWithHost:_mainHost WithHostName:url.host WithPath:url.path WithURL:url injectQueryParam:queryParam];
+    if (mainvc) {
+        return mainvc;
+    }
+    return nil;
+}
+
+- (UIViewController *)handleWithHost:(YHRouterHost *)host WithHostName:(NSString *)hostName WithPath:(NSString *)path WithURL:(NSURL *)url injectQueryParam:(NSDictionary *)queryParam {
+    
+    for (YHRouterMatcher *matcher in host.pathsRegex) {
+        NSString *scheme = [NSString stringWithFormat:@"%@%@",hostName,path];
+        NSPredicate *carTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",matcher.regex];
+        if ([carTest evaluateWithObject:scheme]) {
+            return [self handleWithMatcher:matcher WithBundleName:host.bundleName withUrl:url injectedQueryParam:queryParam];
+        }
+    }
+    return nil;
+}
+
+
 - (UIViewController *)handleWithMatcher:(YHRouterMatcher *)matcher WithBundleName:(NSString *)bundleName withUrl:(NSURL *)url injectedQueryParam:(NSDictionary *)quertParam {
     if (matcher.className) {
         
@@ -96,7 +147,10 @@
         UIViewController * viewController = [[zlass alloc] init];
         if (viewController) {
             if ([viewController respondsToSelector:@selector(instanceWithEntity:)]) {
-                return [viewController performSelector:@selector(instanceWithEntity:) withObject:nil];
+                
+                YHRoterEntity * entity = [self parseWithURL:url andMatcher:matcher];
+                UIViewController *vc =  [viewController performSelector:@selector(instanceWithEntity:) withObject:entity];
+                return vc;
             }
         }
     }
@@ -105,8 +159,55 @@
 
 - (YHRoterEntity *)parseWithURL:(NSURL *)url andMatcher:(YHRouterMatcher *)matcher {
     YHRoterEntity * entity = [[YHRoterEntity alloc] init];
+    entity.rawUrl = url;
+    entity.regex = matcher.regex;
+    NSMutableDictionary *pathParameter = [NSMutableDictionary dictionary];
+    if (matcher.pathIndice.count > 0) {
+        NSArray *array = [url.path componentsSeparatedByString:@"/"];
+        [matcher.pathIndice enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [pathParameter setValue:[array objectAtIndex:[(NSNumber *)obj integerValue]] forKey:key];
+        }];
+    }
+    entity.pathParameter = pathParameter;
     
+    NSMutableDictionary * queryParameter = [NSMutableDictionary dictionary];
+    NSArray * keyValues = [url.query componentsSeparatedByString:@"&"];
+    if (keyValues.count > 0) {
+        for (NSString *wait in keyValues) {
+            NSArray *array = [wait componentsSeparatedByString:@"="];
+            if (array.count > 0) {
+                NSString *value = [array objectAtIndex:1];
+                NSString *key = [array objectAtIndex:0];
+                [queryParameter setValue:value forKey:key];
+            }
+        }
+    }
+    entity.queryParameter = queryParameter;
     return entity;
 }
 
+
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
+    return currentVC;
+}
+
+- (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
+{
+    UIViewController *currentVC;
+    if ([rootVC presentedViewController]) {
+        rootVC = [rootVC presentedViewController];
+    }
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+    } else if ([rootVC isKindOfClass:[UINavigationController class]]){
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+    } else {
+        currentVC = rootVC;
+    }
+    return currentVC;
+}
 @end

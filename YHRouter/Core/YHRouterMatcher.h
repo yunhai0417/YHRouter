@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class YHRouterMatcher;
 
 @interface YHRouterHost : NSObject
 @property(copy, nonatomic) NSString *name;
 @property(copy, nonatomic) NSString *bundleName;
-@property(strong, nonatomic) NSMutableArray *pathsRegex;
+@property(strong, nonatomic) NSMutableArray <YHRouterMatcher *> *pathsRegex;
 - (instancetype)initWithName:(NSString *)name AndBundleName:(NSString *)bundleName;
 
 @end
@@ -19,7 +20,7 @@
 @interface YHRouterMatcher : NSObject
 @property(copy, nonatomic) NSString *regex;
 @property(copy, nonatomic) NSString *className;
-@property(copy, nonatomic) NSDictionary *pathIndice;
+@property(copy, nonatomic) NSDictionary <NSString *, NSNumber *> *pathIndice;
 
 - (instancetype)initWithRegex:(NSString *)regex WithClassName:(NSString *)className WithPathIndice:(NSDictionary *) pathIndice;
 
