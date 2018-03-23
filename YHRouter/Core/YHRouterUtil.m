@@ -44,11 +44,21 @@ static NSString *const bundlePrefix = @"org.cocoapods.";
         NSString *thePlistName = [NSString stringWithFormat:@"%@%@",bundleName,schemePlistName];
         return [self loadPlistFromBundle:[NSBundle bundleWithIdentifier:theBundleName] andName:thePlistName];
     } else {
-        NSString * theBundleNameSuffix = [[bundleName componentsSeparatedByString:@"."] lastObject];
-        NSString * name = [NSString stringWithFormat:@"%@%@",theBundleNameSuffix,schemePlistName];
-        return [self loadPlistFromBundle:[NSBundle bundleWithIdentifier:bundleName] andName:name];
+        NSBundle *bundle = [NSBundle bundleWithIdentifier:bundleName];
+        NSDictionary * thePlist = [self loadPlistFromBundle:bundle AndName:schemePlistName];
+        if (thePlist) {
+            return thePlist;
+        } else {
+            NSString * theBundleNameSuffix = [bundleName componentsSeparatedByString:@"."].lastObject;
+            return [self loadPlistFromBundle:bundle AndName:[NSString stringWithFormat:@"%@%@",theBundleNameSuffix,schemePlistName]];
+        }
     }
     return nil;
+}
+
+- (NSDictionary *)loadPlistFromBundle:(NSBundle *)bundle AndName:(NSString *)name {
+    NSString *path = [bundle pathForResource:name ofType:@"plist"];
+    return [NSDictionary dictionaryWithContentsOfFile:path];
 }
 
 - (NSBundle *)getBundleWithName:(NSString *)bundleName {
